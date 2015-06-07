@@ -10,33 +10,95 @@ var bio = {
 	"github":"leontabak"
     },
     "skills": ["software engineering", "teaching", "writing", "public speaking"]
-};
+}; // bio object
+
+bio.display = function() {
+    var myName = HTMLheaderName.replace("%data%",bio.name);
+    var myRole = HTMLheaderRole.replace("%data%",bio.role);
+
+    $("#header").prepend(myRole);
+    $("#header").prepend(myName);
+    $("#main").append(internationalizeButton);
+
+    var headerName = "";
+    var formattedSkill = "";
+    if( bio.skills.length > 0 ) {
+	headerName = HTMLheaderName.replace( "%data%", "Skills");
+	$("#header").append(headerName);
+
+	$("#header").append(HTMLskillsStart);
+
+	formattedSkill = HTMLskills.replace("%data%",bio.skills[0]);
+	$("#skills").append(formattedSkill);
+
+	formattedSkill = HTMLskills.replace("%data%",bio.skills[1]);
+	$("#skills").append(formattedSkill);
+
+	formattedSkill = HTMLskills.replace("%data%",bio.skills[2]);
+	$("#skills").append(formattedSkill);
+    } // if
+}; // bio.display() function
+
+bio.display();
 
 var work = {
     "jobs": [
               {
 		  "employer":"Cornell College",
 		  "title":"Professor of Computer Science",
-		  "where":"Mount Vernon, Iowa",
+		  "location":"Mount Vernon, Iowa",
 		  "dates":"1989&ndash;Present",
 		  "description":"Develop and teach whole range of undergraduate courses, advise students"
               },
               {
 		  "employer":"Cornell College",
 		  "title":"Faculty Director, Berry Center for Economics, Business, and Public Policy",
-		  "where":"Mount Vernon, Iowa",
+		  "location":"Mount Vernon, Iowa",
 		  "dates":"2013&ndash;Present",
 		  "description":"Introduce students to opportunities that await them after graduation"
               },
               {
 		  "employer":"College Board",
 		  "title":"Consultant",
-		  "where":"New York, New York",
+		  "location":"New York, New York",
 		  "dates":"2001&ndash;Present",
 		  "description":"Develop and lead workshops for high school teachers"
               }
             ]
-};
+}; // work object
+
+work.display = function() {
+    var employer = "";
+    var title = "";
+    var location = "";
+    var dates = "";
+    var description = "";
+    for( jobIndex in work.jobs ) {
+	$("#workExperience").append(HTMLworkStart);
+	employer = work.jobs[jobIndex].employer;
+	employer = HTMLworkEmployer.replace("%data%",employer);
+
+	title = work.jobs[jobIndex].title;
+	title = HTMLworkTitle.replace("%data%",title);
+
+	location = work.jobs[jobIndex].location;
+	location = HTMLworkLocation.replace("%data%",location);
+
+	dates = work.jobs[jobIndex].dates;
+	dates = HTMLworkDates.replace("%data%",dates);
+
+	description = work.jobs[jobIndex].description;
+	description = HTMLworkDescription.replace("%data%",description);
+
+	$(".work-entry:last").append( employer );
+	$(".work-entry:last").append( title );
+	$(".work-entry:last").append( location );
+	$(".work-entry:last").append( dates );
+	$(".work-entry:last").append( description );
+    } // for
+}; // work.display() function
+
+work.display();
 
 var education = {
     "schools":[
@@ -102,8 +164,18 @@ var education = {
 			   "url":"https://www.coursera.org/course/innovativeideas"
                        }
 		      ]
-};
+}; // education object
 
+education.display = function() {
+    var mySchool = "";
+    var myMajors = "";
+    var myDegree = "";
+    var myYear = "";
+    var myCity = "";
+    var myURL = "";
+}; // education.display() function
+
+education.display();
 
 var projects = {
     "projects": [
@@ -119,30 +191,28 @@ var projects = {
 		      "description":"computer graphics",
 		      "images":["http://www.eonsahead.com/dynamic/landscape"]
 		  }
-		 ],
-    "display": function() {
-	//var result = [];
-	var aProject = {};
-	var aTitle = "";
-	var aDates = "";
-	var aDescription = "";
-	var aImages = "";
-	for( projectIndex in this.projects ) {
-	    aProject = this.projects[projectIndex];
-	    //result.push(aProject.title);
-	    $("#projects").append(HTMLprojectStart);
+		 ]
+}; // projects object
 
-	    aTitle = HTMLprojectTitle.replace( "%data%",aProject.title);
-	    $(".project-entry:last").append(aTitle);
+projects.display = function() {
+    var aProject = {};
+    var aTitle = "";
+    var aDates = "";
+    var aDescription = "";
+    var aImages = "";
+    for( projectIndex in this.projects ) {
+	aProject = this.projects[projectIndex];
+	$("#projects").append(HTMLprojectStart);
 
-	    aDates = HTMLprojectDates.replace("%data%",aProject.dates);
-	    $(".project-entry:last").append(aDates);
+	aTitle = HTMLprojectTitle.replace( "%data%",aProject.title);
+	$(".project-entry:last").append(aTitle);
 
-	    aDescription = HTMLprojectDescription.replace("%data%",aProject.description);
-	    $(".project-entry:last").append(aDescription);
-	} // for
-	//return result;
-    } // function
+	aDates = HTMLprojectDates.replace("%data%",aProject.dates);
+	$(".project-entry:last").append(aDates);
+
+	aDescription = HTMLprojectDescription.replace("%data%",aProject.description);
+	$(".project-entry:last").append(aDescription);
+    } // for
 };
 
 projects.display();
@@ -152,55 +222,6 @@ var inName = function( firstAndLastName ) {
     return names[0].slice(0,1).toUpperCase() + names[0].slice(1).toLowerCase() + " " + names[1].toUpperCase();
 };
 
-var myName = HTMLheaderName.replace("%data%",bio.name);
-var myRole = HTMLheaderRole.replace("%data%",bio.role);
 
-$("#header").prepend(myRole);
-$("#header").prepend(myName);
-$("#main").append(internationalizeButton);
-
-
-if( bio.skills.length > 0 ) {
-
-    var headerName = HTMLheaderName.replace( "%data%", "Skills");
-    $("#header").append(headerName);
-
-      $("#header").append(HTMLskillsStart);
-
-      var formattedSkill = HTMLskills.replace("%data%",bio.skills[0]);
-      $("#skills").append(formattedSkill);
-
-      formattedSkill = HTMLskills.replace("%data%",bio.skills[1]);
-      $("#skills").append(formattedSkill);
-
-      formattedSkill = HTMLskills.replace("%data%",bio.skills[2]);
-      $("#skills").append(formattedSkill);
-
-} // if
-
-for( jobIndex in work.jobs ) {
-    $("#workExperience").append(HTMLworkStart);
-    var employer = work.jobs[jobIndex].employer;
-    employer = HTMLworkEmployer.replace("%data%",employer);
-
-    var title = work.jobs[jobIndex].title;
-    title = HTMLworkTitle.replace("%data%",title);
-
-    var where = work.jobs[jobIndex].where;
-    where = HTMLworkLocation.replace("%data%",where);
-
-    var dates = work.jobs[jobIndex].dates;
-    dates = HTMLworkDates.replace("%data%",dates);
-
-    var description = work.jobs[jobIndex].description;
-    description = HTMLworkDescription.replace("%data%",description);
-
-    $(".work-entry:last").append( employer );
-    $(".work-entry:last").append( title );
-    $(".work-entry:last").append( where );
-    $(".work-entry:last").append( dates );
-    $(".work-entry:last").append( description );
-    
-} // for
 
 $("#mapDiv").append(googleMap);

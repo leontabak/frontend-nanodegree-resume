@@ -101,7 +101,6 @@ var education = {
 			   "date":"January 26, 2015",
 			   "url":"https://www.coursera.org/course/innovativeideas"
                        }
-
 		      ]
 };
 
@@ -113,27 +112,53 @@ var projects = {
 		      "dates":"Ongoing",
 		      "description":"computer graphics",
 		      "images":["http://www.eonsahead.com/archimedean.html"]
-		  }
+		  },
                   {
 		      "title":"Synthetic Landscape",
 		      "dates":"Ongoing",
 		      "description":"computer graphics",
 		      "images":["http://www.eonsahead.com/dynamic/landscape"]
 		  }
-		 ]
+		 ],
+    "display": function() {
+	//var result = [];
+	var aProject = {};
+	var aTitle = "";
+	var aDates = "";
+	var aDescription = "";
+	var aImages = "";
+	for( projectIndex in this.projects ) {
+	    aProject = this.projects[projectIndex];
+	    //result.push(aProject.title);
+	    $("#projects").append(HTMLprojectStart);
+
+	    aTitle = HTMLprojectTitle.replace( "%data%",aProject.title);
+	    $(".project-entry:last").append(aTitle);
+
+	    aDates = HTMLprojectDates.replace("%data%",aProject.dates);
+	    $(".project-entry:last").append(aDates);
+
+	    aDescription = HTMLprojectDescription.replace("%data%",aProject.description);
+	    $(".project-entry:last").append(aDescription);
+	} // for
+	//return result;
+    } // function
 };
+
+projects.display();
 
 var inName = function( firstAndLastName ) {
     var names = firstAndLastName.trim().split(" ");
     return names[0].slice(0,1).toUpperCase() + names[0].slice(1).toLowerCase() + " " + names[1].toUpperCase();
-}
+};
 
-var myName = HTMLheaderName.replace("%data%","Leon Tabak");
-var myRole = HTMLheaderRole.replace("%data%","Professor of Computer Science");
+var myName = HTMLheaderName.replace("%data%",bio.name);
+var myRole = HTMLheaderRole.replace("%data%",bio.role);
 
 $("#header").prepend(myRole);
 $("#header").prepend(myName);
 $("#main").append(internationalizeButton);
+
 
 if( bio.skills.length > 0 ) {
 
@@ -151,7 +176,7 @@ if( bio.skills.length > 0 ) {
       formattedSkill = HTMLskills.replace("%data%",bio.skills[2]);
       $("#skills").append(formattedSkill);
 
-}
+} // if
 
 for( jobIndex in work.jobs ) {
     $("#workExperience").append(HTMLworkStart);
@@ -176,5 +201,6 @@ for( jobIndex in work.jobs ) {
     $(".work-entry:last").append( dates );
     $(".work-entry:last").append( description );
     
-}
+} // for
 
+$("#mapDiv").append(googleMap);

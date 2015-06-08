@@ -2,7 +2,7 @@
 var bio = {
     "name": "Leon Tabak",
     "role": "Professor of Computer Science",
-    "welcomeMessage":"Guten Tag!",
+    "welcomeMessage":"Good day! Guten Tag! Dzie&#324; dobry!",
     "contacts": {
 	"email":"l.tabak@ieee.org",
 	"voice":"319 895&ndash;4294",
@@ -40,28 +40,24 @@ bio.display = function() {
 	    case "github": 
 		myContent = HTMLgithub.replace("%data%",bio.contacts.github );
 		break;
+	    case "location":
+	        myContent = HTMLlocation.replace("%data%",bio.contacts.location);
+	        break;
 	} // switch
 	$("#topContacts").append(myContent);
     } // for
 
-    if( bio.skills.length > 0 ) {
-	headerName = HTMLheaderName.replace( "%data%", "Skills");
-	$("#header").append(headerName);
-
-	$("#header").append(HTMLskillsStart);
-
-	formattedSkill = HTMLskills.replace("%data%",bio.skills[0]);
-	$("#skills").append(formattedSkill);
-
-	formattedSkill = HTMLskills.replace("%data%",bio.skills[1]);
-	$("#skills").append(formattedSkill);
-
-	formattedSkill = HTMLskills.replace("%data%",bio.skills[2]);
-	$("#skills").append(formattedSkill);
-    } // if
-
     $("#header").append(HTMLbioPic.replace("%data%",bio.photo));
     $("#header").append(HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage));
+
+    $("#header").append(HTMLskillsStart);
+    for( skillIndex in bio.skills ) {
+	//headerName = HTMLheaderName.replace( "%data%", "Skills");
+	//$("#header").append(headerName);
+
+	formattedSkill = HTMLskills.replace("%data%",bio.skills[skillIndex]);
+	$("#skills").append(formattedSkill);
+    } // for
 }; // bio.display() function
 
 bio.display();
@@ -115,8 +111,7 @@ work.display = function() {
 	description = work.jobs[jobIndex].description;
 	description = HTMLworkDescription.replace("%data%",description);
 
-	$(".work-entry:last").append( employer );
-	$(".work-entry:last").append( title );
+	$(".work-entry:last").append( employer + title );
 	$(".work-entry:last").append( location );
 	$(".work-entry:last").append( dates );
 	$(".work-entry:last").append( description );
@@ -130,25 +125,25 @@ var education = {
 		 {
 		     "name": "Worcester Polytechnic Institute",
 		     "majors":["computer science"],
-		     "degree":"PhD",
+		     "degree":"Doctor of Philosophy",
 		     "year":1989,
-		     "city":"Worcester, Massachusetts",
+		     "location":"Worcester, Massachusetts",
 		     "url":"http://www.wpi.edu"
 		 },
 		 {
 		     "name":"Boston University",
 		     "majors":["computer science"],
-		     "degree":"MS",
+		     "degree":"Master of Science",
 		     "year":1986,
-		     "city":"Boston, Massachusetts",
+		     "location":"Boston, Massachusetts",
 		     "url":"http://www.bu.edu"
 		 },
 		 {
 		     "name":"Massachusetts Institute of Technology",
 		     "majors":["physics"],
-		     "degree":"BS",
+		     "degree":"Bachelor of Science",
 		     "year":1980,
-		     "city":"Cambridge, Massachusetts",
+		     "location":"Cambridge, Massachusetts",
 		     "url":"http://www.mit.edu"
 		 }
 	       ],
@@ -158,35 +153,40 @@ var education = {
 			 "school":"Coursera",
 			 "university":"University of Washington",
 			 "date":"June 29, 2013",
-			 "url":"https://www.coursera.org/course/datasci"
+			 "url":"https://www.coursera.org/course/datasci",
+			 "universityURL":"http://www.washington.edu"
 		       },
                        {
 			   "title":"Startup Engineering",
 			   "school":"Coursera",
 			   "university":"Stanford University",
 			   "date":"September 23, 2013",
-			   "url":"https://www.coursera.org/course/startup"
+			   "url":"https://www.coursera.org/course/startup",
+			   "universityURL":"https://www.stanford.edu"
                        },
                        {
 			   "title":"Coding the Matrix: Linear Algebra through Computer Science Applications",
 			   "school":"Coursera",
 			   "university":"Brown University",
 			   "date":"October 10, 2013",
-			   "url":"https://www.coursera.org/course/matrix"
+			   "url":"https://www.coursera.org/course/matrix",
+			   "universityURL":"http://www.brown.edu"
                        },
                        {
 			   "title":"R Programming",
 			   "school":"Coursera",
 			   "university":"Johns Hopkins University",
 			   "date":"September 16, 2014",
-			   "url":"https://www.coursera.org/course/rprog"
+			   "url":"https://www.coursera.org/course/rprog",
+			   "universityURL":"https://www.jhu.edu"
                        },
                        {
 			   "title":"Developing Innovative Ideas for New Companies: The First Step in Entrepreneurship",
 			   "school":"Coursera",
 			   "university":"University of Maryland",
 			   "date":"January 26, 2015",
-			   "url":"https://www.coursera.org/course/innovativeideas"
+			   "url":"https://www.coursera.org/course/innovativeideas",
+			   "universityURL":"http://www.maryland.edu"
                        }
 		      ]
 }; // education object
@@ -197,21 +197,61 @@ education.display = function() {
     var myMajors = "";
     var myDegree = "";
     var myYear = "";
-    var myCity = "";
-    var myURL = "";
+    var myLocation = "";
+    var myCollegeURL = "";
+
+    var onlineObject = {};
+    var myTitle = "";
+    var myOnlineSchool = "";
+    var myOnlineUniversity = "";
+    var myDate = "";
+    var myOnlineURL = "";
 
     for( schoolIndex in education.schools ) {
 	$("#education").append(HTMLschoolStart);
 	schoolObject = education.schools[schoolIndex];
 
 	mySchoolName = HTMLschoolName.replace( "%data%", schoolObject.name );
-	$(".education-entry:last").append(mySchoolName);
-
 	myDegree = HTMLschoolDegree.replace("%data%",schoolObject.degree);
-	$(".education-entry:last").append(myDegree);
+	$(".education-entry:last").append(mySchoolName + myDegree);
 
 	myYear = HTMLschoolDates.replace("%data%",schoolObject.year);
 	$(".education-entry:last").append(myYear);
+
+	myLocation = HTMLschoolLocation.replace("%data%",schoolObject.location);
+	$(".education-entry:last").append(myLocation);
+
+	for( majorIndex in schoolObject.majors ) {
+	    myMajors = HTMLschoolMajor.replace("%data%",schoolObject.majors[majorIndex]);
+	    $(".education-entry:last").append(myMajors);
+	} // for
+
+	//myCollegeURL = HTMLonlineURL.replace("%data%",schoolObject.url);
+	//$(".education-entry:last").append(myCollegeURL);
+    } // for
+
+    $("#education").append(HTMLonlineClasses);
+
+    for( onlineIndex in education.onlineCourses ) {
+	onlineCourse = education.onlineCourses[onlineIndex];
+
+	$("#education").append(HTMLonlineStart);
+
+	myTitle = HTMLonlineTitle.replace("%url%",onlineCourse.url);
+	myTitle = myTitle.replace("%data%",onlineCourse.title);
+
+	myOnlineSchool = HTMLonlineSchool.replace("%data%",onlineCourse.school);
+	$(".online-entry:last").append(myTitle + myOnlineSchool);
+
+	myOnlineUniversity = HTMLonlineUniversity.replace("%univ%",onlineCourse.universityURL);
+	myOnlineUniversity = myOnlineUniversity.replace("%data%",onlineCourse.university);
+	$(".online-entry:last").append(myOnlineUniversity);
+
+	myDate = HTMLonlineDates.replace("%data%",onlineCourse.date);
+	$("#online-entry:last").append(myDate);
+
+	myOnlineURL = "";
+
     } // for
 }; // education.display() function
 

@@ -7,15 +7,19 @@ var bio = {
 	"email":"l.tabak@ieee.org",
 	"voice":"319 895&ndash;4294",
 	"mobile":"319 491&ndash;3207",
-	"github":"leontabak"
+	"github":"leontabak",
+	"location":"Mount Vernon, Iowa"
     },
-    "skills": ["software engineering", "teaching", "writing", "public speaking"]
+    "skills": ["software engineering", "teaching", "writing", "public speaking"],
+    "photo":"images/leon-june2015.jpg"
 }; // bio object
 
 bio.display = function() {
     var myName = HTMLheaderName.replace("%data%",bio.name);
     var myRole = HTMLheaderRole.replace("%data%",bio.role);
     var myContent = "";
+    var headerName = "";
+    var formattedSkill = "";
 
     $("#header").prepend(myRole);
     $("#header").prepend(myName);
@@ -40,8 +44,6 @@ bio.display = function() {
 	$("#topContacts").append(myContent);
     } // for
 
-    var headerName = "";
-    var formattedSkill = "";
     if( bio.skills.length > 0 ) {
 	headerName = HTMLheaderName.replace( "%data%", "Skills");
 	$("#header").append(headerName);
@@ -57,6 +59,9 @@ bio.display = function() {
 	formattedSkill = HTMLskills.replace("%data%",bio.skills[2]);
 	$("#skills").append(formattedSkill);
     } // if
+
+    $("#header").append(HTMLbioPic.replace("%data%",bio.photo));
+    $("#header").append(HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage));
 }; // bio.display() function
 
 bio.display();
@@ -187,12 +192,27 @@ var education = {
 }; // education object
 
 education.display = function() {
-    var mySchool = "";
+    var schoolObject = {};
+    var mySchoolName = "";
     var myMajors = "";
     var myDegree = "";
     var myYear = "";
     var myCity = "";
     var myURL = "";
+
+    for( schoolIndex in education.schools ) {
+	$("#education").append(HTMLschoolStart);
+	schoolObject = education.schools[schoolIndex];
+
+	mySchoolName = HTMLschoolName.replace( "%data%", schoolObject.name );
+	$(".education-entry:last").append(mySchoolName);
+
+	myDegree = HTMLschoolDegree.replace("%data%",schoolObject.degree);
+	$(".education-entry:last").append(myDegree);
+
+	myYear = HTMLschoolDates.replace("%data%",schoolObject.year);
+	$(".education-entry:last").append(myYear);
+    } // for
 }; // education.display() function
 
 education.display();

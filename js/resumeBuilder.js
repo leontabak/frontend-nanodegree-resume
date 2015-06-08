@@ -15,10 +15,30 @@ var bio = {
 bio.display = function() {
     var myName = HTMLheaderName.replace("%data%",bio.name);
     var myRole = HTMLheaderRole.replace("%data%",bio.role);
+    var myContent = "";
 
     $("#header").prepend(myRole);
     $("#header").prepend(myName);
-    $("#main").append(internationalizeButton);
+    //    $("#main").append(internationalizeButton);
+
+    for( contactKey in bio.contacts ) {
+	switch( contactKey ) {
+	    case "voice": 
+		myContent = HTMLcontactGeneric.replace("%contact%", "office");
+		myContent = myContent.replace("%data%",bio.contacts.voice);
+		break;
+	    case "mobile": 
+		myContent = HTMLmobile.replace("%data%", bio.contacts.mobile ); 
+		break;
+	    case "email": 
+		myContent = HTMLemail.replace("%data%", bio.contacts.email ); 
+		break;
+	    case "github": 
+		myContent = HTMLgithub.replace("%data%",bio.contacts.github );
+		break;
+	} // switch
+	$("#topContacts").append(myContent);
+    } // for
 
     var headerName = "";
     var formattedSkill = "";

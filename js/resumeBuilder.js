@@ -62,6 +62,35 @@ bio.display = function() {
 
 bio.display();
 
+var footer = {
+    "display":function() {
+	var myContent;
+	for( contactKey in bio.contacts ) {
+	    switch( contactKey ) {
+	    case "voice": 
+		myContent = HTMLcontactGeneric.replace("%contact%", "office");
+		myContent = myContent.replace("%data%",bio.contacts.voice);
+		break;
+	    case "mobile": 
+		myContent = HTMLmobile.replace("%data%", bio.contacts.mobile ); 
+		break;
+	    case "email": 
+		myContent = HTMLemail.replace("%data%", bio.contacts.email ); 
+		break;
+	    case "github": 
+		myContent = HTMLgithub.replace("%data%",bio.contacts.github );
+		break;
+	    case "location":
+	        myContent = HTMLlocation.replace("%data%",bio.contacts.location);
+	        break;
+	    } // switch
+	    $("#footerContacts").append(myContent);
+	} // for
+    } // footer.display() function
+};
+
+footer.display();
+
 var work = {
     "jobs": [
               {

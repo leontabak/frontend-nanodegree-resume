@@ -66,14 +66,14 @@ var work = {
     "jobs": [
               {
 		  "employer":"Cornell College",
-		  "title":"Professor and Chairman of Department of Computer Science",
+		  "title":"Professor and Chairman of the Department of Computer Science",
 		  "location":"Mount Vernon, Iowa",
 		  "dates":"1989&ndash;Present",
 		  "description":"Develop and teach whole range of undergraduate courses, advise students"
               },
               {
 		  "employer":"Cornell College",
-		  "title":"Faculty Director, Berry Center for Economics, Business, and Public Policy",
+		  "title":"Faculty Director of the Berry Center for Economics, Business, and Public Policy",
 		  "location":"Mount Vernon, Iowa",
 		  "dates":"2013&ndash;Present",
 		  "description":"Develop and execute programs that introduce students to opportunities that await them after graduation"
@@ -255,10 +255,7 @@ education.display = function() {
 	$(".online-entry:last").append(myOnlineUniversity);
 
 	myDate = HTMLonlineDates.replace("%data%",onlineCourse.date);
-	$("#online-entry:last").append(myDate);
-
-	myOnlineURL = "";
-
+	$(".online-entry:last").append(myDate);
     } // for
 }; // education.display() function
 

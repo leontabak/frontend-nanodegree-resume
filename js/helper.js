@@ -58,7 +58,7 @@ var HTMLonlineStart = '<div class="online-entry"></div>';
 var HTMLonlineTitle = '<a href="%url%">%data%';
 var HTMLonlineSchool = ' &mdash; %data%</a>';
 var HTMLonlineUniversity = '<div class="universityName"><a href="%univ%">with %data%</a></div>';
-var HTMLonlineDates = '<div class="date-text">Completed %data%</div>';
+var HTMLonlineDates = '<div class="completion-date">Completed %data%</div>';
 var HTMLonlineURL = '<br><a href="#">%data%</a>';
 
 var internationalizeButton = '<button>Internationalize</button>';

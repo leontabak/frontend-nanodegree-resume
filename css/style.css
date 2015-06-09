@@ -64,6 +64,15 @@ h2, h3, h4, h5 {
   float: left;
 }
 
+.completion-date {
+  margin-left: 24px;
+  font-style: italic;
+  font-size: 14px;
+  color: #999999;
+  line-height: 16px;
+  clear: both;
+}
+
 .location-text {
   font-style: italic;
   font-size: 14px;
@@ -80,6 +89,7 @@ h2, h3, h4, h5 {
   font-size: 14px;
   color: #999999;
   line-height: 16px;
+  clear: both;
 }
 
 

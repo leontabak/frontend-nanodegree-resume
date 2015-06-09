@@ -10,7 +10,7 @@ var bio = {
 	"github":"leontabak",
 	"location":"Mount Vernon, Iowa"
     },
-    "skills": ["software engineering", "teaching", "writing", "public speaking"],
+    "skills": ["teaching", "software engineering", "project development", "writing"],
     "photo":"images/leon-june2015.jpg"
 }; // bio object
 
@@ -66,7 +66,7 @@ var work = {
     "jobs": [
               {
 		  "employer":"Cornell College",
-		  "title":"Professor of Computer Science",
+		  "title":"Professor and Chairman of Department of Computer Science",
 		  "location":"Mount Vernon, Iowa",
 		  "dates":"1989&ndash;Present",
 		  "description":"Develop and teach whole range of undergraduate courses, advise students"
@@ -76,15 +76,22 @@ var work = {
 		  "title":"Faculty Director, Berry Center for Economics, Business, and Public Policy",
 		  "location":"Mount Vernon, Iowa",
 		  "dates":"2013&ndash;Present",
-		  "description":"Introduce students to opportunities that await them after graduation"
+		  "description":"Develop and execute programs that introduce students to opportunities that await them after graduation"
               },
               {
 		  "employer":"College Board",
 		  "title":"Consultant",
 		  "location":"New York, New York",
 		  "dates":"2001&ndash;Present",
-		  "description":"Develop and lead workshops for high school teachers"
-              }
+		  "description":"Develop and lead workshops for high school teachers of Advanced Placement courses"
+              },
+              {
+		  "employer":"Educational Policy Improvement Center",
+		  "title":"Senior Reviewer/Curriculum Advisor",
+		  "location":"Eugene,Oregon",
+		  "dates":"2010&ndash;Present",
+		  "description":"Guide teachers in their efforts to conform to College Board's standards for Advanced Placement courses"
+	      }
             ]
 }; // work object
 
@@ -263,13 +270,19 @@ var projects = {
 		      "title":"Archimedean Tilings",
 		      "dates":"Ongoing",
 		      "description":"computer graphics",
-		      "images":["http://www.eonsahead.com/archimedean.html"]
+		      "images":["images/archimedean/image008.jpg",
+				"images/archimedean/image018.jpg",
+				"images/archimedean/image019.jpg",
+				"images/archimedean/image030.jpg"]
 		  },
                   {
 		      "title":"Synthetic Landscape",
 		      "dates":"Ongoing",
 		      "description":"computer graphics",
-		      "images":["http://www.eonsahead.com/dynamic/landscape"]
+		      "images":["images/landscapes/landscape00.jpg",
+				"images/landscapes/landscape01.jpg",
+				"images/landscapes/landscape02.jpg",
+				"images/landscapes/landscape03.jpg"]
 		  }
 		 ]
 }; // projects object
@@ -279,7 +292,7 @@ projects.display = function() {
     var aTitle = "";
     var aDates = "";
     var aDescription = "";
-    var aImages = "";
+    var anImage = "";
     for( projectIndex in this.projects ) {
 	aProject = this.projects[projectIndex];
 	$("#projects").append(HTMLprojectStart);
@@ -292,6 +305,12 @@ projects.display = function() {
 
 	aDescription = HTMLprojectDescription.replace("%data%",aProject.description);
 	$(".project-entry:last").append(aDescription);
+
+	$(".project-entry:last").append(HTMLprojectImageCollection);
+	for( imageIndex in aProject.images ) {
+	    anImage = HTMLprojectImage.replace("%data%",aProject.images[imageIndex]);
+	    $(".imageCollection:last").append(anImage);
+	} // for
     } // for
 };
 

@@ -11,7 +11,7 @@ var bio = {
 	"location":"Mount Vernon, Iowa"
     },
     "skills": ["teaching", "software engineering", "project development", "writing"],
-    "photo":"images/leon-june2015.jpg"
+    "biopic":"images/leon-june2015.jpg"
 }; // bio object
 
 bio.display = function() {
@@ -47,7 +47,7 @@ bio.display = function() {
 	$("#topContacts").append(myContent);
     } // for
 
-    $("#header").append(HTMLbioPic.replace("%data%",bio.photo));
+    $("#header").append(HTMLbioPic.replace("%data%",bio.biopic));
     $("#header").append(HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage));
 
     $("#header").append(HTMLskillsStart);
@@ -162,7 +162,7 @@ var education = {
 		     "name": "Worcester Polytechnic Institute",
 		     "majors":["computer science"],
 		     "degree":"Doctor of Philosophy",
-		     "year":1989,
+		     "dates":1989,
 		     "location":"Worcester, Massachusetts",
 		     "url":"http://www.wpi.edu"
 		 },
@@ -170,7 +170,7 @@ var education = {
 		     "name":"Boston University",
 		     "majors":["computer science"],
 		     "degree":"Master of Science",
-		     "year":1986,
+		     "dates":1986,
 		     "location":"Boston, Massachusetts",
 		     "url":"http://www.bu.edu"
 		 },
@@ -178,7 +178,7 @@ var education = {
 		     "name":"Massachusetts Institute of Technology",
 		     "majors":["physics"],
 		     "degree":"Bachelor of Science",
-		     "year":1980,
+		     "dates":1980,
 		     "location":"Cambridge, Massachusetts",
 		     "url":"http://www.mit.edu"
 		 }
@@ -251,7 +251,7 @@ education.display = function() {
 	myDegree = HTMLschoolDegree.replace("%data%",schoolObject.degree);
 	$(".education-entry:last").append(mySchoolName + myDegree);
 
-	myYear = HTMLschoolDates.replace("%data%",schoolObject.year);
+	myYear = HTMLschoolDates.replace("%data%",schoolObject.dates);
 	$(".education-entry:last").append(myYear);
 
 	myLocation = HTMLschoolLocation.replace("%data%",schoolObject.location);
